@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>User Pagina</title>
+    </h:head>
+    <h:body>
+        <h:form> 
+            <p:dataScroller var="tweet" value="#{userBean.tweets}" chunkSize="5">
+                <f:facet name="header">
+                    Tweets for #{userBean.loggedInUser.username}
+                </f:facet>
+
+        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+            <!--<p:graphicImage value="/resources/images/tweet.png" /> -->
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Message:" />
+                    <h:outputText value="#{tweet.message}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+            </p:dataScroller>
+        </h:form>
+    </h:body>
+</html>
+
