@@ -6,7 +6,6 @@ import domain.User;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -26,17 +25,16 @@ public class UserService implements Serializable {
     private UserDAO userDAO;
 
     public User getLoggedInUser() {
-        if(loggedInUser == null)
-        {
+        if (loggedInUser == null) {
             Principal p = sessionContext.getCallerPrincipal();
             this.loggedInUser = userDAO.getUserByUsername(p.getName());
         }
-        
+
         return this.loggedInUser;
     }
 
     @PermitAll
-    public List<User> getFollowers(User user) {        
+    public List<User> getFollowers(User user) {
         return userDAO.getFollowers(user);
     }
 
@@ -45,13 +43,12 @@ public class UserService implements Serializable {
         return userDAO.getTweets(user);
     }
 
-    @RolesAllowed("admin")
+    //    @RolesAllowed("admin")
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
-    
-    public void setDAO(UserDAO dao)
-    {
+
+    public void setDAO(UserDAO dao) {
         this.userDAO = dao;
     }
 }

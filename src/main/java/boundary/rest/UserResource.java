@@ -9,17 +9,23 @@ import javax.ws.rs.*;
 import java.util.List;
 
 @Stateless
-@Path("kwetter")
+@Path("user")
 public class UserResource {
-    
+
     @Inject
     UserService us;
-    
+
     @GET
-    @Path("allusers")
-    public List<User> allUsers()
-    {
+    @Path("/all")
+    public List<User> allUsers() {
         return us.getAllUsers();
     }
-    
+
+
+    @GET
+    @Path("/hoi")
+    public String hoi() {
+        return "Hoi";
+    }
+
 }

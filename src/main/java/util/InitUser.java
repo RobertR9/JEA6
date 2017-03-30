@@ -17,6 +17,7 @@ public class InitUser {
 
     @PostConstruct
     public void init() {
+        System.out.println("INIT");
         User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen");
         User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen");
         User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen");
@@ -47,6 +48,7 @@ public class InitUser {
         ud.save(bert);
         ud.save(klaas);
         ud.save(jan);
+        System.err.println("Initialization success.");
     }
 
 }

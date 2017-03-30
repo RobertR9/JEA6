@@ -7,12 +7,23 @@ package boundary.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- *
- * @author 878550
- */
-@ApplicationPath("api")
-public class JAXRSconfig extends Application{
+@ApplicationPath("")
+public class JAXRSconfig extends Application {
+    private final Set<Class<?>> classes;
+
+    public JAXRSconfig() {
+        HashSet<Class<?>> c = new HashSet<>();
+        c.add(UserResource.class);
+        this.classes = Collections.unmodifiableSet(c);
+    }
+
+    @Override
+    public Set<Class<?>> getClasses() {
+        return classes;
+    }
     
 }
