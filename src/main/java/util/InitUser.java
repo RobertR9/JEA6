@@ -48,7 +48,7 @@ public class InitUser {
         ud.save(bert);
         ud.save(klaas);
         ud.save(jan);
-        System.err.println("Initialization success.");
+        System.out.println("Initialization success.");
     }
 
 }
