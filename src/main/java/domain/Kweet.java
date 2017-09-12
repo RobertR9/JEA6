@@ -9,7 +9,7 @@ public class Kweet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 140)
-    private String tweet;
+    private String kweet;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date postDate;
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -27,12 +27,13 @@ public class Kweet {
      * @param owner    User
      */
     public Kweet(String tweet, Date postDate, User owner) {
-        this.tweet = tweet;
+        this.kweet = tweet;
         this.postDate = postDate;
         this.owner = owner;
     }
 
     //region Getters & Setters
+
     /**
      * Getters & Setters
      */
@@ -40,12 +41,12 @@ public class Kweet {
         return id;
     }
 
-    public String getTweet() {
-        return tweet;
+    public String getKweet() {
+        return kweet;
     }
 
-    public Kweet setTweet(String tweet) {
-        this.tweet = tweet;
+    public Kweet setTweet(String kweet) {
+        this.kweet = kweet;
         return this;
     }
 
