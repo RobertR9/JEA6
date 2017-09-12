@@ -23,9 +23,9 @@ public class UserResource {
 
 
     @GET
-    @Path("/hoi")
+    @Path("/test")
     public String hoi() {
-        return "Hoi";
+        return "Hello WORLD!!!1111!!";
     }
 
 }

@@ -1,7 +1,7 @@
 package service;
 
 import dao.UserDAO;
-import domain.Tweet;
+import domain.Kweet;
 import domain.User;
 
 import javax.annotation.Resource;
@@ -27,7 +27,7 @@ public class UserService implements Serializable {
     public User getLoggedInUser() {
         if (loggedInUser == null) {
             Principal p = sessionContext.getCallerPrincipal();
-            this.loggedInUser = userDAO.getUserByUsername(p.getName());
+            this.loggedInUser = userDAO.find(p.getName());
         }
 
         return this.loggedInUser;
@@ -39,7 +39,7 @@ public class UserService implements Serializable {
     }
 
     @PermitAll
-    public List<Tweet> getTweets(User user) {
+    public List<Kweet> getTweets(User user) {
         return userDAO.getTweets(user);
     }
 

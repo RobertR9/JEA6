@@ -1,6 +1,6 @@
 package boundary.jsf;
 
-import domain.Tweet;
+import domain.Kweet;
 import domain.User;
 import service.UserService;
 
@@ -28,7 +28,7 @@ public class UserController implements Serializable {
         return userService.getFollowers(userService.getLoggedInUser());
     }
 
-    public List<Tweet> getTweets() {
+    public List<Kweet> getTweets() {
         return userService.getTweets(userService.getLoggedInUser());
     }
 

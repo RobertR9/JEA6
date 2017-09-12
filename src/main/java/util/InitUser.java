@@ -37,11 +37,11 @@ public class InitUser {
 
         jan.addFollowing(hans);
 
-        bert.addTweet("First tweet from " + bert.getUsername());
-        hans.addTweet("First tweet from " + hans.getUsername());
-        frank.addTweet("First tweet from " + frank.getUsername());
-        klaas.addTweet("First tweet from " + klaas.getUsername());
-        jan.addTweet("First tweet from " + jan.getUsername());
+        bert.addKweet("First tweet from " + bert.getUsername());
+        hans.addKweet("First tweet from " + hans.getUsername());
+        frank.addKweet("First tweet from " + frank.getUsername());
+        klaas.addKweet("First tweet from " + klaas.getUsername());
+        jan.addKweet("First tweet from " + jan.getUsername());
 
         ud.save(hans);
         ud.save(frank);

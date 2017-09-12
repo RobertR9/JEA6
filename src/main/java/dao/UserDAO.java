@@ -1,6 +1,6 @@
 package dao;
 
-import domain.Tweet;
+import domain.Kweet;
 import domain.User;
 
 import javax.ejb.Stateless;
@@ -19,26 +19,32 @@ public class UserDAO {
         em.persist(user);
     }
 
-    public User getUserByUsername(String username) {
-        Query q = em.createNamedQuery("User.getUserByUsername");
+    public User find(String username) {
+        Query q = em.createNamedQuery("User.findByUsername");
         q.setParameter("username", username);
         return (User) q.getSingleResult();
     }
 
+    public User find(Long id) {
+        Query q = em.createNamedQuery("User.findById");
+        q.setParameter("id", id);
+        return (User) q.getSingleResult();
+    }
+
     public List<User> getFollowers(User user) {
-        Query q = em.createNamedQuery("User.getFollowersByUser");
+        Query q = em.createNamedQuery("User.findFollowers");
         q.setParameter("user", user);
         return q.getResultList();
     }
 
-    public List<Tweet> getTweets(User user) {
-        Query q = em.createNamedQuery("User.getTweetsByUser");
+    public List<Kweet> getTweets(User user) {
+        Query q = em.createNamedQuery("User.findAllKweets");
         q.setParameter("user", user);
         return q.getResultList();
     }
 
     public List<User> getAllUsers() {
-        Query q = em.createNamedQuery("User.getAllUsers");
+        Query q = em.createNamedQuery("User.findAll");
         return q.getResultList();
     }
 

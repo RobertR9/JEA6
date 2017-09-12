@@ -4,13 +4,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 @Entity(name = "Users")
 @NamedQueries({
-        @NamedQuery(name = "User.getUserByUsername", query = "SELECT u FROM Users as u WHERE u.username = :username"),
-        @NamedQuery(name = "User.getFollowersByUser", query = "SELECT u FROM Users as u WHERE u.following = :user"),
-        @NamedQuery(name = "User.getTweetsByUser", query = "SELECT t FROM Tweet as t WHERE t.owner = :user"),
-        @NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM Users u")
+        @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM Users as u WHERE u.username = :username"),
+        @NamedQuery(name = "User.findById", query = "SELECT u FROM Users as u WHERE u.id = :id"),
+        @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM Users as u WHERE u.following = :user"),
+        @NamedQuery(name = "User.findAllKweets", query = "SELECT t FROM Kweet as t WHERE t.owner = :user"),
+        @NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u")
 })
 public class User {
     @Id
@@ -18,6 +20,8 @@ public class User {
     private Long id;
     private String username;
     private String password;
+
+    //Profile settings
     private String name;
     private String location;
     private String web;
@@ -25,18 +29,23 @@ public class User {
     private String profilePicture;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private Collection<User> following;
+    private Collection<User> following = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private Collection<User> followers;
+    private Collection<User> followers = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
-    private Collection<Tweet> tweets;
+    private Collection<Kweet> kweets = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userID"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "roleID"))
+    private Collection<Role> roles = new ArrayList();
 
     /**
      * Constructors
      */
     public User() {
+        //Empty constructor
     }
 
     /**
@@ -54,12 +63,10 @@ public class User {
         this.location = location;
         this.web = web;
         this.bio = bio;
-
-        // empty lists
-        this.following = new ArrayList();
-        this.followers = new ArrayList();
-        this.tweets = new ArrayList();
     }
+
+
+    //region Getters and Setters
 
     /**
      * Getters & Setters
@@ -127,27 +134,18 @@ public class User {
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
+    //endregion
 
     public Boolean addFollowing(User following) {
-        // add as follower to following user
-        following.addFollower(this);
-        // add as following to this user
-        return this.following.add(following);
+        return true;
     }
 
     public Boolean deleteFollowing(User following) {
-        // remove as follower to following user
-        following.deleteFollower(this);
-        // remove as following to this user
-        return this.following.remove(following);
+        return true;
     }
 
     public Collection<User> getFollowing() {
         return following;
-    }
-
-    public void setFollowing(Collection<User> following) {
-        this.following = following;
     }
 
     private boolean addFollower(User follower) {
@@ -162,23 +160,42 @@ public class User {
         return followers;
     }
 
-    public void setFollowers(Collection<User> followers) {
-        this.followers = followers;
-    }
-
-    public void addTweet(String message) {
+    public void addKweet(String message) {
         if (message == null || message.isEmpty()) {
             return;
         }
 
-        this.tweets.add(new Tweet(message, new Date(), this));
+        this.kweets.add(new Kweet(message, new Date(), this));
     }
 
-    public Collection<Tweet> getTweets() {
-        return tweets;
+    public Collection<Kweet> getKweets() {
+        return kweets;
     }
 
-    public void setTweets(Collection<Tweet> tweets) {
-        this.tweets = tweets;
+    public void addKweet(Kweet kweet) {
+        this.kweets.add(kweet);
+    }
+
+    public void removeKweet(Kweet kweet) {
+//        Iterator<Kweet> iter = kweets.iterator();
+//        while (iter.hasNext()) {
+//            Kweet kweet = iter.next();
+//            if (kweet.getUser().equals(kweet.getUser())) {
+//                if (kweet.().equals(kweet.getKweetText())) {
+//                    iter.remove();
+//                }
+//            }
+//        }
+    }
+
+    public Kweet findKweet(Long id) {
+        Iterator<Kweet> iter = kweets.iterator();
+        while (iter.hasNext()) {
+            Kweet kweet = iter.next();
+            if (kweet.getId().equals(id)) {
+                return kweet;
+            }
+        }
+        return null;
     }
 }

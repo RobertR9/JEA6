@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Tweet {
+public class Kweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +18,7 @@ public class Tweet {
     /**
      * Constructors
      */
-    public Tweet() {
+    public Kweet() {
     }
 
     /**
@@ -26,12 +26,13 @@ public class Tweet {
      * @param postDate Date
      * @param owner    User
      */
-    public Tweet(String tweet, Date postDate, User owner) {
+    public Kweet(String tweet, Date postDate, User owner) {
         this.tweet = tweet;
         this.postDate = postDate;
         this.owner = owner;
     }
 
+    //region Getters & Setters
     /**
      * Getters & Setters
      */
@@ -43,7 +44,7 @@ public class Tweet {
         return tweet;
     }
 
-    public Tweet setTweet(String tweet) {
+    public Kweet setTweet(String tweet) {
         this.tweet = tweet;
         return this;
     }
@@ -52,8 +53,17 @@ public class Tweet {
         return owner;
     }
 
-    public Tweet setOwner(User owner) {
+    public Kweet setOwner(User owner) {
         this.owner = owner;
         return this;
     }
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
+    //endregion
 }
