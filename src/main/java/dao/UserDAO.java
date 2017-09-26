@@ -3,49 +3,82 @@ package dao;
 import domain.Kweet;
 import domain.User;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
-@Stateless
-public class UserDAO {
+public interface UserDAO {
 
-    @PersistenceContext(name = "KwetterPU")
-    public EntityManager em;
+    /**
+     * Method to create users for testing purposes.
+     */
+    void initUsers();
 
-    public void save(User user) {
-        em.persist(user);
-    }
+    /**
+     * @param user User
+     * @return User
+     */
+    User createUser(User user);
 
-    public User find(String username) {
-        Query q = em.createNamedQuery("User.findByUsername");
-        q.setParameter("username", username);
-        return (User) q.getSingleResult();
-    }
+    /**
+     * @param user User
+     * @return User
+     */
+    User editUser(User user);
 
-    public User find(Long id) {
-        Query q = em.createNamedQuery("User.findById");
-        q.setParameter("id", id);
-        return (User) q.getSingleResult();
-    }
+    /**
+     * @param user User
+     */
+    void removeUser(User user);
 
-    public List<User> getFollowers(User user) {
-        Query q = em.createNamedQuery("User.findFollowers");
-        q.setParameter("user", user);
-        return q.getResultList();
-    }
+    /**
+     * @param user User
+     * @return User
+     */
+    User find(User user);
 
-    public List<Kweet> getTweets(User user) {
-        Query q = em.createNamedQuery("User.findAllKweets");
-        q.setParameter("user", user);
-        return q.getResultList();
-    }
+    /**
+     * @return List<User>
+     */
+    List<User> findAllUsers();
 
-    public List<User> getAllUsers() {
-        Query q = em.createNamedQuery("User.findAll");
-        return q.getResultList();
-    }
+    /**
+     * Returns a list of Users which are following the given user.
+     *
+     * @param user User
+     * @return List<User>
+     */
+    List<User> findAllFollowing(User user);
+
+    /**
+     * @param user      User
+     * @param following User
+     */
+    void addFollowing(User user, User following);
+
+    /**
+     * @param user     User
+     * @param follower User
+     */
+    void removeFollowing(User user, User follower);
+
+    /**
+     * Returns a list of Users which the given user is following.
+     *
+     * @param user User
+     * @return List<User>
+     */
+    List<User> findAllFollowers(User user);
+
+    /**
+     * @param user     User
+     * @param follower User
+     */
+    void addFollower(User user, User follower);
+
+    /**
+     * @param user     User
+     * @param follower User
+     */
+    void removeFollower(User user, User follower);
+
 
 }

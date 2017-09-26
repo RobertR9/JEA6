@@ -10,8 +10,8 @@ import java.util.Iterator;
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM Users as u WHERE u.username = :username"),
         @NamedQuery(name = "User.findById", query = "SELECT u FROM Users as u WHERE u.id = :id"),
-        @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM Users as u WHERE u.following = :user"),
-        @NamedQuery(name = "User.findAllKweets", query = "SELECT t FROM Kweet as t WHERE t.owner = :user"),
+        @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM Users as u WHERE u.followers = :user"),
+        @NamedQuery(name = "User.findFollowing", query = "SELECT u FROM Users as u WHERE u.following = :user"),
         @NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u")
 })
 public class User {

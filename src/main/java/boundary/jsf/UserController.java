@@ -29,7 +29,7 @@ public class UserController implements Serializable {
     }
 
     public List<Kweet> getTweets() {
-        return userService.getTweets(userService.getLoggedInUser());
+        return userService.getKweets(userService.getLoggedInUser());
     }
 
     public List<User> getAllUsers() {

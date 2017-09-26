@@ -3,7 +3,11 @@ package domain;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity()
+@NamedQueries({
+        @NamedQuery(name = "Kweet.findAllByUser", query = "SELECT k FROM Kweet as k WHERE k.owner = :user"),
+        @NamedQuery(name = "Kweet.findBySearchString", query = "SELECT k FROM Kweet as k WHERE k.kweet LIKE :searchString")
+})
 public class Kweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

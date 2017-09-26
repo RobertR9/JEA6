@@ -8,17 +8,28 @@ import java.io.Serializable;
 public class Role implements Serializable {
 
     @Id
-    public String roleID;
+    public String id;
+    public String name;
 
     public Role() {
         //empty constructor
     }
 
-    public Role(String roleID) {
-        this.roleID = roleID;
+    //region Getters & Setters
+    public Role(String id) {
+        this.id = id;
     }
 
-    public String getRoleID() {
-        return roleID;
+    public String getId() {
+        return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    //endregion
 }

@@ -1,6 +1,7 @@
 package service;
 
-import dao.UserDAO;
+import dao.KweetDAOJPAImpl;
+import dao.UserDAOJPAImpl;
 import domain.Kweet;
 import domain.User;
 
@@ -22,33 +23,33 @@ public class UserService implements Serializable {
     private SessionContext sessionContext;
 
     @Inject
-    private UserDAO userDAO;
+    private UserDAOJPAImpl userDAOJPAImpl;
+    @Inject
+    private KweetDAOJPAImpl kweetDAOJPAImpl;
 
     public User getLoggedInUser() {
-        if (loggedInUser == null) {
-            Principal p = sessionContext.getCallerPrincipal();
-            this.loggedInUser = userDAO.find(p.getName());
-        }
-
-        return this.loggedInUser;
+//        if (loggedInUser == null) {
+//            Principal p = sessionContext.getCallerPrincipal();
+//            this.loggedInUser = userDAOJPAImpl.find(p.getName());
+//        }
+//
+//        return this.loggedInUser;
+        return null;
     }
 
     @PermitAll
     public List<User> getFollowers(User user) {
-        return userDAO.getFollowers(user);
+        return userDAOJPAImpl.findAllFollowers(user);
     }
 
     @PermitAll
-    public List<Kweet> getTweets(User user) {
-        return userDAO.getTweets(user);
+    public List<Kweet> getKweets(User user) {
+        return kweetDAOJPAImpl.findTweetsByUser(user);
     }
 
     //    @RolesAllowed("admin")
     public List<User> getAllUsers() {
-        return userDAO.getAllUsers();
+        return userDAOJPAImpl.findAllUsers();
     }
 
-    public void setDAO(UserDAO dao) {
-        this.userDAO = dao;
-    }
 }

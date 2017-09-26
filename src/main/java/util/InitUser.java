@@ -1,6 +1,6 @@
 package util;
 
-import dao.UserDAO;
+import dao.UserDAOJPAImpl;
 import domain.User;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class InitUser {
 
     @Inject
-    UserDAO ud;
+    UserDAOJPAImpl ud;
 
     @PostConstruct
     public void init() {
@@ -43,11 +43,11 @@ public class InitUser {
         klaas.addKweet("First tweet from " + klaas.getUsername());
         jan.addKweet("First tweet from " + jan.getUsername());
 
-        ud.save(hans);
-        ud.save(frank);
-        ud.save(bert);
-        ud.save(klaas);
-        ud.save(jan);
+        ud.editUser(hans);
+        ud.editUser(frank);
+        ud.editUser(bert);
+        ud.editUser(klaas);
+        ud.editUser(jan);
         System.out.println("Initialization success.");
     }
 
