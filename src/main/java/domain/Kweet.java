@@ -6,7 +6,9 @@ import java.util.Date;
 @Entity()
 @NamedQueries({
         @NamedQuery(name = "Kweet.findAllByUser", query = "SELECT k FROM Kweet as k WHERE k.owner = :user"),
-        @NamedQuery(name = "Kweet.findBySearchString", query = "SELECT k FROM Kweet as k WHERE k.kweet LIKE :searchString")
+        @NamedQuery(name = "Kweet.findBySearchString", query = "SELECT k FROM Kweet as k WHERE k.kweet LIKE :searchString"),
+        @NamedQuery(name = "Kweet.findMentions", query = "SELECT k FROM Kweet as k WHERE k.kweet LIKE :username"),
+
 })
 public class Kweet {
     @Id

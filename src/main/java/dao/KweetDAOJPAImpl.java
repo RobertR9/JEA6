@@ -3,18 +3,18 @@ package dao;
 import domain.Kweet;
 import domain.User;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 
-@Stateless
+@RequestScoped
 public class KweetDAOJPAImpl implements KweetDAO {
 
     @PersistenceContext(name = "KwetterPU")
-    public EntityManager em;
+    private EntityManager em;
 
     /**
      * @param kweetText String

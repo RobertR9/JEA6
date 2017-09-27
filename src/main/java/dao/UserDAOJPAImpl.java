@@ -1,19 +1,18 @@
 package dao;
 
-import domain.Kweet;
 import domain.User;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@Stateless
+@RequestScoped
 public class UserDAOJPAImpl implements UserDAO {
 
     @PersistenceContext(name = "KwetterPU")
-    public EntityManager em;
+    private EntityManager em;
 
     /**
      * Method to create users for testing purposes.
@@ -68,7 +67,8 @@ public class UserDAOJPAImpl implements UserDAO {
     @Override
     public List<User> findAllUsers() {
         Query q = em.createNamedQuery("User.findAll");
-        return q.getResultList();
+        List<User> result = q.getResultList();
+        return result;
     }
 
     /**

@@ -19,15 +19,25 @@ public class UserService implements Serializable {
 
     @Inject
     private UserDAOJPAImpl userDAOJPAImpl;
-    @Inject
-    private KweetDAOJPAImpl kweetDAOJPAImpl;
+
+    public void add(User user) {
+        userDAOJPAImpl.createUser(user);
+    }
+
+    public void edit(User user) {
+        userDAOJPAImpl.editUser(user);
+    }
+
+    public void delete(User user) {
+        userDAOJPAImpl.removeUser(user);
+    }
 
     public List<User> getFollowers(User user) {
         return userDAOJPAImpl.findAllFollowers(user);
     }
 
-    public List<Kweet> getKweets(User user) {
-        return kweetDAOJPAImpl.findTweetsByUser(user);
+    public List<User> getFollowing(User user) {
+        return userDAOJPAImpl.findAllFollowing(user);
     }
 
     public List<User> getAllUsers() {

@@ -13,27 +13,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @Ignore
-public class UserTest {
+public class KweetTest {
 
     private static List<User> userList;
     private static List<User> userFollowingList;
 
-    public UserTest() {
+    public KweetTest() {
     }
 
     @Before
     public void setUp() {
-        userList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            userList.add(new User("Test" + i, "test+i", "Test+i Test", "The Netherlands", "www.google.nl", "test user" + i));
-        }
-
-        userFollowingList = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            userFollowingList.add(new User("Test" + i, "test+i", "Test+i Test", "The Netherlands", "www.google.nl", "test user" + i));
-        }
     }
 
     @After
@@ -42,9 +32,7 @@ public class UserTest {
 
     @Test
     public void testAddUser() throws Exception {
-        User user = new User("Test", "test", "Test Test", "The Netherlands", "www.google.nl", "test user");
-        userList.add(user);
-        assertEquals(11, userList.size());
+
     }
 
     @Test
