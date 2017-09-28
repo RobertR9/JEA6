@@ -24,18 +24,18 @@ public class InitUser {
         User klaas = new User("Klaas", "klaas", "klaas test", "tiel", "www.google.com", "voetballen");
         User jan = new User("Jan", "jan", "jan test", "den haag", "www.google.com", "gamen");
 
-        hans.addFollowing(frank);
-        hans.addFollowing(bert);
-        hans.addFollowing(klaas);
-        hans.addFollowing(jan);
+        hans.addFollower(frank);
+        hans.addFollower(bert);
+        hans.addFollower(klaas);
+        hans.addFollower(jan);
 
-        frank.addFollowing(bert);
-        frank.addFollowing(klaas);
-        frank.addFollowing(jan);
+        frank.addFollower(bert);
+        frank.addFollower(klaas);
+        frank.addFollower(jan);
 
-        bert.addFollowing(klaas);
+        bert.addFollower(klaas);
 
-        jan.addFollowing(hans);
+        jan.addFollower(hans);
 
         bert.addKweet("First tweet from " + bert.getUsername());
         hans.addKweet("First tweet from " + hans.getUsername());

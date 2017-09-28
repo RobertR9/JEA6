@@ -4,14 +4,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 
 @Entity(name = "Users")
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM Users as u WHERE u.username = :username"),
         @NamedQuery(name = "User.findById", query = "SELECT u FROM Users as u WHERE u.id = :id"),
         @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM Users as u WHERE u.followers = :user"),
-        @NamedQuery(name = "User.findFollowing", query = "SELECT u FROM Users as u WHERE u.following = :user"),
         @NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u")
 })
 public class User {
@@ -27,9 +25,6 @@ public class User {
     private String web;
     private String bio;
     private String profilePicture;
-
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private Collection<User> following = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<User> followers = new ArrayList<>();
@@ -136,23 +131,11 @@ public class User {
     }
     //endregion
 
-    public Boolean addFollowing(User following) {
-        return true;
-    }
-
-    public Boolean deleteFollowing(User following) {
-        return true;
-    }
-
-    public Collection<User> getFollowing() {
-        return following;
-    }
-
-    private boolean addFollower(User follower) {
+    public boolean addFollower(User follower) {
         return followers.add(follower);
     }
 
-    private boolean deleteFollower(User follower) {
+    public boolean deleteFollower(User follower) {
         return followers.remove(follower);
     }
 
@@ -177,25 +160,6 @@ public class User {
     }
 
     public void removeKweet(Kweet kweet) {
-//        Iterator<Kweet> iter = kweets.iterator();
-//        while (iter.hasNext()) {
-//            Kweet kweet = iter.next();
-//            if (kweet.getUser().equals(kweet.getUser())) {
-//                if (kweet.().equals(kweet.getKweetText())) {
-//                    iter.remove();
-//                }
-//            }
-//        }
-    }
-
-    public Kweet findKweet(Long id) {
-        Iterator<Kweet> iter = kweets.iterator();
-        while (iter.hasNext()) {
-            Kweet kweet = iter.next();
-            if (kweet.getId().equals(id)) {
-                return kweet;
-            }
-        }
-        return null;
+        kweets.removeIf(kwt -> kwt.getId().equals(kweet.getId()));
     }
 }

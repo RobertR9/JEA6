@@ -6,7 +6,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -42,36 +41,28 @@ public class UserTest {
 
     @Test
     public void testAddUser() throws Exception {
-        User user = new User("Test", "test", "Test Test", "The Netherlands", "www.google.nl", "test user");
+        User user = new User("Henk", "test", "Henkie", "The Netherlands", "www.google.nl", "test user");
         userList.add(user);
         assertEquals(11, userList.size());
     }
 
     @Test
     public void testAddFollowing() throws Exception {
-        int i = 9;
-        for (User follower : userFollowingList) {
-            userList.get(i).addFollowing(follower);
-            i--;
-        }
-
-        assertTrue(userList.get(9).getFollowing().contains(userFollowingList.get(0)));
-        assertTrue(userList.get(0).getFollowing().contains(userFollowingList.get(9)));
+        User henk = userList.get(9);
+        assertTrue(henk.getFollowers().size() == 0);
+        henk.addFollower(userList.get(0));
+        assertTrue(henk.getFollowers().size() == 1);
+        assertTrue(henk.getFollowers().contains(userList.get(0)));
     }
 
     @Test
-    public void testAddKweet() throws Exception {
-
-        int i;
-        String newLine = System.getProperty("line.separator");
-
-        for (i = 0; i < 10; i++) {
-            Kweet testKweet = new Kweet(" This is a new Kweet " + i, new Date(), userList.get(1));
-            userList.get(1).addKweet(testKweet);
-        }
-
-        for (Kweet kweet : userList.get(1).getKweets()) {
-            System.out.print(kweet.getKweet() + " Posted By:" + kweet.getOwner().getUsername() + newLine + "on: " + kweet.getPostDate());
-        }
+    public void testRemoveFollower() throws Exception {
+        User henk = userList.get(9);
+        User follower = userList.get(0);
+        henk.addFollower(follower);
+        assertTrue(henk.getFollowers().size() == 1);
+        assertTrue(henk.getFollowers().contains(userList.get(0)));
+        henk.deleteFollower(follower);
+        assertTrue(henk.getFollowers().size() == 0);
     }
 }

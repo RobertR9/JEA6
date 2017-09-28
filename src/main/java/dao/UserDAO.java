@@ -41,26 +41,6 @@ public interface UserDAO {
     List<User> findAllUsers();
 
     /**
-     * Returns a list of Users which are following the given user.
-     *
-     * @param user User
-     * @return List<User>
-     */
-    List<User> findAllFollowing(User user);
-
-    /**
-     * @param user      User
-     * @param following User
-     */
-    void addFollowing(User user, User following);
-
-    /**
-     * @param user     User
-     * @param follower User
-     */
-    void removeFollowing(User user, User follower);
-
-    /**
      * Returns a list of Users which the given user is following.
      *
      * @param user User

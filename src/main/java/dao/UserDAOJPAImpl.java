@@ -67,39 +67,8 @@ public class UserDAOJPAImpl implements UserDAO {
     @Override
     public List<User> findAllUsers() {
         Query q = em.createNamedQuery("User.findAll");
-        List<User> result = q.getResultList();
-        return result;
-    }
-
-    /**
-     * Returns a list of Users which are following the given user.
-     *
-     * @param user User
-     * @return List<User>
-     */
-    @Override
-    public List<User> findAllFollowing(User user) {
-        Query q = em.createNamedQuery("User.findFollowing");
-        q.setParameter("user", user);
-        return q.getResultList();
-    }
-
-    /**
-     * @param user      User
-     * @param following User
-     */
-    @Override
-    public void addFollowing(User user, User following) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    /**
-     * @param user     User
-     * @param follower User
-     */
-    @Override
-    public void removeFollowing(User user, User follower) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<User> users = q.getResultList();
+        return users;
     }
 
     /**
@@ -112,7 +81,8 @@ public class UserDAOJPAImpl implements UserDAO {
     public List<User> findAllFollowers(User user) {
         Query q = em.createNamedQuery("User.findFollowers");
         q.setParameter("user", user);
-        return q.getResultList();
+        List<User> followers = q.getResultList();
+        return followers;
     }
 
     /**
@@ -121,7 +91,8 @@ public class UserDAOJPAImpl implements UserDAO {
      */
     @Override
     public void addFollower(User user, User follower) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        user.addFollower(follower);
+        em.merge(user);
     }
 
     /**
@@ -130,7 +101,8 @@ public class UserDAOJPAImpl implements UserDAO {
      */
     @Override
     public void removeFollower(User user, User follower) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        user.deleteFollower(follower);
+        em.merge(user);
     }
 
 }
