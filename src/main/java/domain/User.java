@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 @Entity(name = "Users")
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM Users as u WHERE u.username = :username"),
         @NamedQuery(name = "User.findById", query = "SELECT u FROM Users as u WHERE u.id = :id"),
-        @NamedQuery(name = "User.findFollowers", query = "SELECT u FROM Users as u WHERE u.followers = :user"),
+        @NamedQuery(name = "User.findFollowers", query = "SELECT u.followers FROM Users as u WHERE u = :user"),
         @NamedQuery(name = "User.findAll", query = "SELECT u FROM Users u")
 })
 public class User {
@@ -160,6 +161,6 @@ public class User {
     }
 
     public void removeKweet(Kweet kweet) {
-        kweets.removeIf(kwt -> kwt.getId().equals(kweet.getId()));
+        kweets.removeIf(kwt -> kwt.getKweet().equals(kweet.getKweet()));
     }
 }

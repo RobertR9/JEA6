@@ -1,6 +1,5 @@
 package dao;
 
-import domain.Kweet;
 import domain.User;
 
 import java.util.List;
@@ -30,10 +29,16 @@ public interface UserDAO {
     void removeUser(User user);
 
     /**
-     * @param user User
+     * @param id Long
      * @return User
      */
-    User find(User user);
+    User find(Long id);
+
+    /**
+     * @param username String
+     * @return User
+     */
+    User find(String username);
 
     /**
      * @return List<User>

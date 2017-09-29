@@ -33,4 +33,12 @@ public class UserService implements Serializable {
     public List<User> getAllUsers() {
         return userDAOJPAImpl.findAllUsers();
     }
+
+    public User findByUsername(String username){
+       return this.userDAOJPAImpl.find(username);
+    }
+
+    public void setUserDAO(UserDAOJPAImpl userDAOJPAImpl) {
+        this.userDAOJPAImpl = userDAOJPAImpl;
+    }
 }

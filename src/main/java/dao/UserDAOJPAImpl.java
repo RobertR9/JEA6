@@ -51,13 +51,24 @@ public class UserDAOJPAImpl implements UserDAO {
     }
 
     /**
-     * @param user User
+     * @param id Long
      * @return User
      */
     @Override
-    public User find(User user) {
+    public User find(Long id) {
         Query q = em.createNamedQuery("User.findById");
-        q.setParameter("id", user.getId());
+        q.setParameter("id", id);
+        return (User) q.getSingleResult();
+    }
+
+    /**
+     * @param username String
+     * @return User
+     */
+    @Override
+    public User find(String username) {
+        Query q = em.createNamedQuery("User.findByUsername");
+        q.setParameter("username", username);
         return (User) q.getSingleResult();
     }
 
@@ -105,4 +116,12 @@ public class UserDAOJPAImpl implements UserDAO {
         em.merge(user);
     }
 
+    /**
+     * This is for testing purposes.
+     *
+     * @param em EntityManager
+     */
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
 }
