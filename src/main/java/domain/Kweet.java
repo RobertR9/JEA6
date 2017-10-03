@@ -60,10 +60,6 @@ public class Kweet {
         return owner;
     }
 
-    public Kweet setOwner(User owner) {
-        this.owner = owner;
-        return this;
-    }
 
     public Date getPostDate() {
         return postDate;

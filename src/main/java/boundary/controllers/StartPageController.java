@@ -80,11 +80,6 @@ public class StartPageController implements Serializable {
 
     public List<Kweet> getTimeLine() {
         List<Kweet> kweets = kweetService.getKweetsForUser(loginController.getUser());
-        System.err.print("Timeling size: " + kweets.size());
-        for (Kweet kweet :
-                kweets) {
-            System.err.print("Kweet: " +kweet.getId());
-        }
         return kweets;
     }
 }
