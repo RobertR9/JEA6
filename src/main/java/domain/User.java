@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 
 @Entity(name = "Users")
 @NamedQueries({
@@ -144,12 +143,13 @@ public class User {
         return followers;
     }
 
-    public void addKweet(String message) {
+    public Kweet addKweet(String message) {
         if (message == null || message.isEmpty()) {
-            return;
+            return null;
         }
-
+        Kweet kweet = new Kweet(message, new Date(), this);
         this.kweets.add(new Kweet(message, new Date(), this));
+        return kweet;
     }
 
     public Collection<Kweet> getKweets() {

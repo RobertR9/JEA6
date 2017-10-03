@@ -10,7 +10,8 @@
     <p:menubar>
         <f:facet name="options">
             <p:inputText style="margin-right:10px" placeholder="#{msg.menu_search}"/>
-            <p:commandButton type="button" value="#{msg.menu_profile}"/>
+            <p:commandButton type="button" value="#{msg.menu_profile}"
+                             action="#{NavigationController.redirectToProfile}"/>
             <p:commandButton type="button" value="#{msg.menu_logout}" icon="ui-icon-extlink"
                              action="#{LoginController.doLogout()}"/>
         </f:facet>

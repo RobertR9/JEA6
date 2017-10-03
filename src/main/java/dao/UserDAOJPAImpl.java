@@ -1,11 +1,13 @@
 package dao;
 
+import domain.Kweet;
 import domain.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 @RequestScoped
@@ -114,6 +116,12 @@ public class UserDAOJPAImpl implements UserDAO {
     public void removeFollower(User user, User follower) {
         user.deleteFollower(follower);
         em.merge(user);
+    }
+
+    public Kweet createKweet(String kweetText, Date postDate, User user) {
+        Kweet kweet = user.addKweet(kweetText);
+        this.em.merge(user);
+        return kweet;
     }
 
     /**

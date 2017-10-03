@@ -18,7 +18,7 @@ public class InitUser {
     @PostConstruct
     public void init() {
         System.out.println("INIT");
-        User admin = new User("Admin", "admin", "Admin", "eindhoven", "www.google.com", "zwemmen");
+        User admin = new User("Admin", "admin", "Admin", "de maan", "www.example.com", "bannen");
         User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen");
         User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen");
         User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen");
@@ -45,11 +45,11 @@ public class InitUser {
         klaas.addKweet("First tweet from " + klaas.getUsername());
         jan.addKweet("First tweet from " + jan.getUsername());
 
-        ud.editUser(hans);
-        ud.editUser(frank);
-        ud.editUser(bert);
-        ud.editUser(klaas);
-        ud.editUser(jan);
+        ud.createUser(hans);
+        ud.createUser(frank);
+        ud.createUser(bert);
+        ud.createUser(klaas);
+        ud.createUser(jan);
         System.out.println("Initialization success.");
     }
 

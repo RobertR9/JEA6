@@ -8,16 +8,20 @@ import domain.User;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Stateless
 public class KweetService implements Serializable {
     @Inject
     private KweetDAOJPAImpl kweetDAOJPAImpl;
+    @Inject
+    private UserDAOJPAImpl userDAOJPA;
 
     public Kweet add(String kweet, User user) {
-       return kweetDAOJPAImpl.createKweet(kweet, new Date(), user);
+        return userDAOJPA.createKweet(kweet, new Date(), user);
     }
 
     public void edit(Kweet kweet) {
@@ -34,5 +38,15 @@ public class KweetService implements Serializable {
 
     public List<Kweet> getKweetsByUser(User user) {
         return kweetDAOJPAImpl.findTweetsByUser(user);
+    }
+
+    public List<Kweet> getKweetsForUser(User user) {
+        Iterator<User> iterator = user.getFollowers().iterator();
+        List<Kweet> kweets = new ArrayList<>();
+        // while loop
+        while (iterator.hasNext()) {
+            kweets.addAll(kweetDAOJPAImpl.findTweetsByUser(iterator.next()));
+        }
+        return kweets;
     }
 }

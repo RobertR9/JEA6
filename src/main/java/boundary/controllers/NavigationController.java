@@ -5,7 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
-@Named("NavigationBean")
+@Named("NavigationController")
 @SessionScoped
 public class NavigationController implements Serializable {
 
@@ -48,21 +48,21 @@ public class NavigationController implements Serializable {
     }
 
     /**
-     * Redirect to overview page.
+     * Redirect to profile page.
      *
-     * @return Overview page name.
+     * @return Profile page name.
      */
-    public String redirectToOverview() {
-        return "/secured/overview.xhtml?faces-redirect=true";
+    public String redirectToProfile() {
+        return "/secured/profile.xhtml?faces-redirect=true";
     }
 
     /**
-     * Go to overview page.
+     * Go to profile page.
      *
-     * @return Overview page name.
+     * @return Profile page name.
      */
-    public String toOverview() {
-        return "/secured/overview.xhtml";
+    public String toProfile() {
+        return "/secured/profile.xhtml";
     }
 
     /**

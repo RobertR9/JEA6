@@ -41,18 +41,20 @@ public class LoginController implements Serializable {
      * @return url String
      */
     public String doLogin() {
-        if (userService.login(this.username, this.password) == null) {
-            //Set login ERROR
-            FacesMessage msg = new FacesMessage("Invalid credentials.", "ERROR MSG");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            FacesContext.getCurrentInstance().addMessage("login-form", msg);
-
-            //To to login page
-            return navigationController.redirectToLogin();
-        }
         this.setUser(userService.login(this.username, this.password));
-        this.setLoggedIn(true);
-        return navigationController.redirectToIndex();
+        if (this.user != null) {
+            System.err.print(user.getId());
+            this.setLoggedIn(true);
+
+            return navigationController.redirectToIndex();
+        }
+//         Set login ERROR
+        FacesMessage msg = new FacesMessage("Invalid credentials.", "ERROR MSG");
+        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+//         To to login page
+        return navigationController.redirectToLogin();
     }
 
     /**
@@ -61,7 +63,6 @@ public class LoginController implements Serializable {
      * @return url String
      */
     public String doLogout() {
-        System.err.print("logout");
         // Set the paremeter indicating that user is logged in to false
         loggedIn = false;
 
@@ -70,8 +71,7 @@ public class LoginController implements Serializable {
         msg.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
-        return "/login.xhtml?faces-redirect=true";
-//        return navigationController.redirectToLogin();
+        return navigationController.redirectToLogin();
     }
 
     // ------------------------------
