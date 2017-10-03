@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<ui:composition template="/default/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-g-nopad">
+                    <div class="ui-g-12">
+                        <p:panel>
+                            <div>
+                                <h1>#{msg.start_welcome}</h1>
+                                <h:form>
+                                    <h:inputTextarea style="margin-bottom: 10px; width: 520px; height: 120px;"
+                                                     p:placeholder="Whats on your mind?"
+                                                     value="#{startPageController.newKweet}" id="newKweet">
+                                        <f:validateLength minimum="1" maximum="140"/>
+                                    </h:inputTextarea>
+                                    <p>
+                                        <h:commandButton styleClass="btn btn-lg btn-primary btn-block" id="button"
+                                                         value="#{msg.btn_create_kweet}"
+                                                         action="#{startPageController.createKweet()}"/>
+                                    </p>
+                                </h:form>
+                            </div>
+                        </p:panel>
+                    </div>
+                    <div class="ui-g-12 ui-g-nopad">
+                        <div class="ui-g-12">
+                            <p:panel>
+                                <h3 style="margin-top:0">Basic</h3>
+                                <p:tabView>
+                                    <p:tab title="Timeline">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText
+                                                    value="The story begins as Don Vito Corleone..."/>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Mentions">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText value="Not implemented yet."/>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                </p:tabView>
+                            </p:panel>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-g-nopad">
+                    <div class="ui-g-12">
+                        <p:panel>
+                            <h:outputLabel>#{msg.index_kweets_total} #{startPageController.kweets.size()}</h:outputLabel>
+                            <br/>
+                            <h:outputText value="#{startPageController.getLatestKweet()}"/>
+                        </p:panel>
+                    </div>
+                    <div class="ui-g-12 ui-g-nopad">
+                        <div class="ui-g-12">
+                            <p:panel>
+                                <h:outputLabel value="#{msg.index_trends}"/>
+                                <ul class="list-unstyled">
+                                    <ui:repeat value="#{startPageController.trends}" var="fakeTrend">
+                                        <li role="presentation">
+                                            <a href="#">#{fakeTrend}</a>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </p:panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+    </ui:define>
+</ui:composition>
+</html>

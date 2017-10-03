@@ -33,9 +33,9 @@ public class User {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private Collection<Kweet> kweets = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userID"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "roleID"))
-    private Collection<Role> roles = new ArrayList();
+//    @ManyToMany
+//    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userID"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "roleID"))
+//    private Collection<Role> roles = new ArrayList();
 
     /**
      * Constructors

@@ -18,11 +18,13 @@ public class InitUser {
     @PostConstruct
     public void init() {
         System.out.println("INIT");
+        User admin = new User("Admin", "admin", "Admin", "eindhoven", "www.google.com", "zwemmen");
         User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen");
         User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen");
         User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen");
         User klaas = new User("Klaas", "klaas", "klaas test", "tiel", "www.google.com", "voetballen");
         User jan = new User("Jan", "jan", "jan test", "den haag", "www.google.com", "gamen");
+        ud.createUser(admin);
 
         hans.addFollower(frank);
         hans.addFollower(bert);

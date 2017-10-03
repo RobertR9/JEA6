@@ -16,8 +16,8 @@ public class KweetService implements Serializable {
     @Inject
     private KweetDAOJPAImpl kweetDAOJPAImpl;
 
-    public void add(String kweet, User user) {
-        kweetDAOJPAImpl.createKweet(kweet, new Date(), user);
+    public Kweet add(String kweet, User user) {
+       return kweetDAOJPAImpl.createKweet(kweet, new Date(), user);
     }
 
     public void edit(Kweet kweet) {

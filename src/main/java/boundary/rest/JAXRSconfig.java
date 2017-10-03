@@ -7,9 +7,7 @@ package boundary.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @ApplicationPath("/api")
 public class JAXRSconfig extends Application {
@@ -27,4 +25,10 @@ public class JAXRSconfig extends Application {
         return classes;
     }
 
+    @Override
+    public Map<String, Object> getProperties() {
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put("jersey.config.server.provider.packages", "com.memorynotfound.rs");
+        return properties;
+    }
 }

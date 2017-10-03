@@ -34,11 +34,25 @@ public class UserService implements Serializable {
         return userDAOJPAImpl.findAllUsers();
     }
 
-    public User findByUsername(String username){
-       return this.userDAOJPAImpl.find(username);
+    public User findById(Long id) {
+        return this.userDAOJPAImpl.find(id);
+    }
+
+    public User findByUsername(String username) {
+        return this.userDAOJPAImpl.find(username);
     }
 
     public void setUserDAO(UserDAOJPAImpl userDAOJPAImpl) {
         this.userDAOJPAImpl = userDAOJPAImpl;
+    }
+
+    public User login(String username, String password) {
+        User found = this.userDAOJPAImpl.find(username);
+        if (found == null) {
+            return null;
+        } else if (found.getPassword().equals(password)) {
+            return found;
+        }
+        return null;
     }
 }

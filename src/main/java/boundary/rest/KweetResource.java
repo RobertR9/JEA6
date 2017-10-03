@@ -3,6 +3,7 @@ package boundary.rest;
 import domain.Kweet;
 import domain.User;
 import service.KweetService;
+import service.UserService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,6 +17,8 @@ public class KweetResource {
 
     @Inject
     private KweetService kweetService;
+    @Inject
+    private UserService userService;
 
     @GET
     @Path("/test")
@@ -24,9 +27,11 @@ public class KweetResource {
     }
 
     @POST
-    @Path("/add")
+    @Path("/add/user/{userid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addKweet(String kweet, User user) {
+    @Consumes
+    public Response addKweet(String kweet,@PathParam("userid") Long id) {
+        User user = userService.findById(id);
         kweetService.add(kweet, user);
         if (kweet == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Kweet cannot be empty").build();

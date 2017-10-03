@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <title>Kwetter</title>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>title</title>
+    </f:facet>
+    <f:facet name="middle">
+        <h:outputStylesheet name="css/signin.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="javascript"/>
+    </f:facet>
+    <f:facet name="last">
+    </f:facet>
+</h:head>
+<h:body>
+    <div class="container">
+        <h:form id="login-form" styleClass="form-signin">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="form-signin-heading">
+                        <h:outputText value="#{msg.loginTitle}"/>
+                    </h2>
+                    <h:panelGrid columns="2">
+                        Language :
+                        <h:selectOneMenu value="#{LanguageController.localeCode}" onchange="submit()"
+                                         valueChangeListener="#{LanguageController.countryLocaleCodeChanged}">
+                            <f:selectItems value="#{LanguageController.countriesInMap}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                </div>
+                <div class="panel-body">
+                    <h:messages/>
+                    <h:inputText styleClass="form-control" a:placeholder="#{msg.username}" required="true"
+                                 value="#{LoginController.username}" id="username"/>
+                    <h:inputSecret styleClass="form-control" a:placeholder="#{msg.password}" required="true"
+                                   value="#{LoginController.password}" id="password"/>
+                    <br/>
+                    <h:commandButton styleClass="btn btn-lg btn-primary btn-block" id="button" value="#{msg.loginBtn}"
+                                     action="#{LoginController.doLogin}"/>
+                </div>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>
