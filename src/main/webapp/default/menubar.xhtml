@@ -8,12 +8,16 @@
 <h:form>
     <!--<p:growl id="messages"/>-->
     <p:menubar>
+        <p:menuitem value="#{msg.menu_index}" action="#{NavigationController.redirectToIndex}" icon="ui-icon-home"/>
+        <p:menuitem value="#{msg.menu_profile}" action="#{NavigationController.redirectToProfile}"
+                    icon="ui-icon-person"/>
+        <p:menuitem value="#{msg.menu_logout}" action="#{LoginController.doLogout}" icon="ui-icon-extlink"/>
         <f:facet name="options">
-            <p:inputText style="margin-right:10px" placeholder="#{msg.menu_search}"/>
-            <p:commandButton type="button" value="#{msg.menu_profile}"
-                             action="#{NavigationController.redirectToProfile}"/>
-            <p:commandButton type="button" value="#{msg.menu_logout}" icon="ui-icon-extlink"
-                             action="#{LoginController.doLogout()}"/>
+            <p:selectOneMenu value="#{LanguageController.localeCode}" onchange="submit()"
+                             valueChangeListener="#{LanguageController.countryLocaleCodeChanged}">
+                <f:selectItems value="#{LanguageController.countriesInMap}"/>
+            </p:selectOneMenu>
+            <p:inputText style="margin-right: 0 10px" placeholder="#{msg.menu_search}"/>
         </f:facet>
     </p:menubar>
 </h:form>
