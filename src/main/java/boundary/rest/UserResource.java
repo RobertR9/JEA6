@@ -30,56 +30,38 @@ public class UserResource {
     }
 
     @POST
-    @Path("/add")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
     public Response addUser(User user) {
-        userService.add(user);
-        if (user == null) {
+        User userResult = userService.add(user);
+        if (userResult == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("User not found with id:" + user.getId()).build();
         }
-        String json = user.getId().toString();
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        return Response.ok(userResult, MediaType.APPLICATION_JSON).build();
     }
 
     @PUT
-    @Path("/edit")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response editUser(User user) {
-        if (user == null) {
+        User foundUser = userService.findById(user.getId());
+        if (foundUser == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("User not found with id:" + user.getId()).build();
         }
-        userService.edit(user);
-        String json = user.getId().toString();
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        User userResult = userService.edit(user);
+        return Response.ok(userResult, MediaType.APPLICATION_JSON).build();
     }
 
     @DELETE
-    @Path("/delete")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteUser(User user) {
-        if (user == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("User not found with id:" + user.getId()).build();
+    public Response deleteUser(@PathParam("id") Long id) {
+        System.err.print(id);
+        User foundUser = userService.findById(id);
+        if (foundUser == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("User not found with id:" + id).build();
         }
-        userService.delete(user);
+        userService.delete(foundUser);
 
-        String json = user.getId().toString();
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
-    }
-
-    @GET
-    @Path("/get")
-    @Produces("application/json")
-    public User getProductInJSON() {
-
-        User product = new User();
-        product.setName("iPad 3");
-        product.setId(999L);
-
-        return product;
-
+        return Response.ok().build();
     }
 
 }

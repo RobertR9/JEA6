@@ -14,12 +14,12 @@ public class UserService implements Serializable {
     @Inject
     private UserDAOJPAImpl userDAOJPAImpl;
 
-    public void add(User user) {
-        userDAOJPAImpl.createUser(user);
+    public User add(User user) {
+        return userDAOJPAImpl.createUser(user);
     }
 
-    public void edit(User user) {
-        userDAOJPAImpl.editUser(user);
+    public User edit(User user) {
+       return userDAOJPAImpl.editUser(user);
     }
 
     public void delete(User user) {

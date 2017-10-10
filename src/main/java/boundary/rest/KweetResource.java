@@ -20,17 +20,11 @@ public class KweetResource {
     @Inject
     private UserService userService;
 
-    @GET
-    @Path("/test")
-    public String hoi() {
-        return "Hello WORLD!!!1111!!";
-    }
-
     @POST
-    @Path("/add/user/{userid}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes
-    public Response addKweet(String kweet,@PathParam("userid") Long id) {
+    public Response addKweet(String kweet,@PathParam("id") Long id) {
         User user = userService.findById(id);
         kweetService.add(kweet, user);
         if (kweet == null) {
@@ -44,7 +38,6 @@ public class KweetResource {
     }
 
     @PUT
-    @Path("/edit")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editKweet(Kweet kweet) {
@@ -57,7 +50,6 @@ public class KweetResource {
     }
 
     @DELETE
-    @Path("/delete")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteKweet(Kweet kweet) {

@@ -68,14 +68,6 @@ public class ProfileController implements Serializable {
         return followers;
     }
 
-    private void findAllFollowing() {
-        if (!user.getFollowers().isEmpty()) {
-            for (User user : following) {
-                kweets.addAll(user.getKweets());
-            }
-        }
-    }
-
     public String getNumbersOfFollowers() {
         return String.valueOf(this.user.getFollowers().size());
     }
@@ -85,13 +77,9 @@ public class ProfileController implements Serializable {
         return String.valueOf(this.user.getFollowers().size());
     }
 
-    public String getNumberOfkweets() {
+    public String getNumberOfKweets() {
         return String.valueOf(this.user.getKweets().size());
     }
-
-//    private void findAllFollowers() {
-//        followers = (List<User>) kweetService.findAllFollower(user.getUserID());
-//    }
 
 //    public void searchKweet(AjaxBehaviorEvent event) {
 //        UIInput input = (UIInput) event.getSource();

@@ -60,6 +60,25 @@ public class User {
         this.bio = bio;
     }
 
+    /**
+     * @param id       Integer
+     * @param username String
+     * @param password String
+     * @param name     String
+     * @param location String
+     * @param web      String
+     * @param bio      String
+     */
+    public User(Integer id, String username, String password, String name, String location, String web, String bio) {
+        this.id = new Long(id);
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.location = location;
+        this.web = web;
+        this.bio = bio;
+    }
+
 
     //region Getters and Setters
 
