@@ -13,16 +13,17 @@
         <param-value>Development</param-value>
     </context-param>
 
+
     <!-- Login filter -->
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>boundary.controllers.filters.LoginFilter</filter-class>
-    </filter>
-    <!-- Set the login filter to secure all the pages in the /secured/* path of the application  -->
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/secured/*</url-pattern>
-    </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<filter-class>boundary.controllers.filters.LoginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--&lt;!&ndash; Set the login filter to secure all the pages in the /secured/* path of the application  &ndash;&gt;-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<url-pattern>/secured/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
     <!-- By default go to the index page -->
     <welcome-file-list>

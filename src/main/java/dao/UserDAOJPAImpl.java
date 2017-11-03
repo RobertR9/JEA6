@@ -5,6 +5,7 @@ import domain.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Date;
@@ -69,9 +70,15 @@ public class UserDAOJPAImpl implements UserDAO {
      */
     @Override
     public User find(String username) {
-        Query q = em.createNamedQuery("User.findByUsername");
-        q.setParameter("username", username);
-        return (User) q.getSingleResult();
+        try {
+
+            Query q = em.createNamedQuery("User.findByUsername");
+            q.setParameter("username", username);
+            return (User) q.getSingleResult();
+        } catch (NoResultException e) {
+            System.err.print(e);
+            return null;
+        }
     }
 
     /**
@@ -116,6 +123,20 @@ public class UserDAOJPAImpl implements UserDAO {
     public void removeFollower(User user, User follower) {
         user.deleteFollower(follower);
         em.merge(user);
+    }
+
+    /**
+     * Returns a list of Users which the given user is following.
+     *
+     * @param user User
+     * @return List<User>
+     */
+    @Override
+    public List<User> findFollowingForUser(User user) {
+        Query q = em.createNamedQuery("User.findFollowers");
+        q.setParameter("user", user);
+        List<User> followers = q.getResultList();
+        return followers;
     }
 
     public Kweet createKweet(String kweetText, Date postDate, User user) {

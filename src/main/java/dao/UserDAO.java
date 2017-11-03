@@ -65,5 +65,11 @@ public interface UserDAO {
      */
     void removeFollower(User user, User follower);
 
-
+    /**
+     * Returns a list of Users which the given user is following.
+     *
+     * @param user User
+     * @return List<User>
+     */
+    List<User> findFollowingForUser(User user);
 }

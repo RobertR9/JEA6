@@ -55,4 +55,17 @@ public class UserService implements Serializable {
         }
         return null;
     }
+    public void authenticate(String username, String password) {
+        User found = this.userDAOJPAImpl.find(username);
+        if (null == found) {
+            throw new SecurityException("Invalid user");
+        }
+        if (!found.getPassword().equals(password)) {
+            throw new SecurityException("Invalid password");
+        }
+    }
+
+    public List<User> getFollowing(User user) {
+      return  this.userDAOJPAImpl.findFollowingForUser(user);
+    }
 }

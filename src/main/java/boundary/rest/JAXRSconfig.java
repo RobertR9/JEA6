@@ -11,24 +11,24 @@ import java.util.*;
 
 @ApplicationPath("/api")
 public class JAXRSconfig extends Application {
-    private final Set<Class<?>> classes;
-
-    public JAXRSconfig() {
-        HashSet<Class<?>> c = new HashSet<>();
-        c.add(UserResource.class);
-        c.add(KweetResource.class);
-        this.classes = Collections.unmodifiableSet(c);
-    }
-
-    @Override
-    public Set<Class<?>> getClasses() {
-        return classes;
-    }
-
-    @Override
-    public Map<String, Object> getProperties() {
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("jersey.config.server.provider.packages", "com.memorynotfound.rs");
-        return properties;
-    }
+//    private final Set<Class<?>> classes;
+//
+//    public JAXRSconfig() {
+//        HashSet<Class<?>> c = new HashSet<>();
+//        c.add(UserResource.class);
+//        c.add(KweetResource.class);
+//        this.classes = Collections.unmodifiableSet(c);
+//    }
+//
+//    @Override
+//    public Set<Class<?>> getClasses() {
+//        return classes;
+//    }
+//
+//    @Override
+//    public Map<String, Object> getProperties() {
+//        Map<String, Object> properties = new HashMap<String, Object>();
+//        properties.put("jersey.config.server.provider.packages", "com.memorynotfound.rs");
+//        return properties;
+//    }
 }
