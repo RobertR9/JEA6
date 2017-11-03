@@ -5,9 +5,9 @@ import java.util.Date;
 
 @Entity()
 @NamedQueries({
-        @NamedQuery(name = "Kweet.findAllByUser", query = "SELECT k FROM Kweet as k WHERE k.owner = :user ORDER BY k.postDate desc"),
-        @NamedQuery(name = "Kweet.findBySearchString", query = "SELECT k FROM Kweet as k WHERE k.kweet LIKE :searchString"),
-        @NamedQuery(name = "Kweet.findMentions", query = "SELECT k FROM Kweet as k WHERE k.kweet LIKE :username"),
+        @NamedQuery(name = "Kweet.findAllByUser", query = "SELECT k FROM Kweet as k WHERE k.owner = :user ORDER BY k.postDate DESC"),
+        @NamedQuery(name = "Kweet.findBySearchString", query = "SELECT k FROM Kweet as k WHERE k.message LIKE :searchString"),
+        @NamedQuery(name = "Kweet.findMentions", query = "SELECT k FROM Kweet as k WHERE k.message LIKE :username"),
 
 })
 public class Kweet {
@@ -15,7 +15,7 @@ public class Kweet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 140)
-    private String kweet;
+    private String message;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date postDate;
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -33,7 +33,20 @@ public class Kweet {
      * @param owner    User
      */
     public Kweet(String tweet, Date postDate, User owner) {
-        this.kweet = tweet;
+        this.message = tweet;
+        this.postDate = postDate;
+        this.owner = owner;
+    }
+
+    /**
+     * @param id       Integer
+     * @param message    String
+     * @param postDate Date
+     * @param owner    User
+     */
+    public Kweet(Integer id, String message, Date postDate, User owner) {
+        this.id = new Long(id);
+        this.message = message;
         this.postDate = postDate;
         this.owner = owner;
     }
@@ -47,13 +60,21 @@ public class Kweet {
         return id;
     }
 
-    public String getKweet() {
-        return kweet;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Kweet setTweet(String kweet) {
-        this.kweet = kweet;
-        return this;
+    public void setOwner(User owner) {
+
+        this.owner = owner;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public User getOwner() {
@@ -69,4 +90,15 @@ public class Kweet {
         this.postDate = postDate;
     }
     //endregion
+
+
+    @Override
+    public String toString() {
+        return "Kweet{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", postDate=" + postDate +
+                ", owner=" + owner.getId() +
+                '}';
+    }
 }

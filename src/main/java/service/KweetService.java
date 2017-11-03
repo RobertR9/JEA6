@@ -37,7 +37,7 @@ public class KweetService implements Serializable {
     }
 
     public List<Kweet> getKweetsByUser(User user) {
-        return kweetDAOJPAImpl.findTweetsByUser(user);
+        return kweetDAOJPAImpl.findKweetsByUser(user);
     }
 
     public List<Kweet> getKweetsForUser(User user) {
@@ -45,9 +45,14 @@ public class KweetService implements Serializable {
         List<Kweet> kweets = new ArrayList<>();
         // while loop
         while (iterator.hasNext()) {
-            kweets.addAll(kweetDAOJPAImpl.findTweetsByUser(iterator.next()));
+            kweets.addAll(kweetDAOJPAImpl.findKweetsByUser(iterator.next()));
         }
+        kweets.addAll(kweetDAOJPAImpl.findKweetsByUser(user));
         return kweets;
     }
-    
+
+    public List<Kweet> findKweetsMentionedByUser(String username) {
+        return kweetDAOJPAImpl.findKweetsMentionedByUser(username);
+    }
+
 }

@@ -2,6 +2,8 @@ package boundary.rest;
 
 import domain.Kweet;
 import domain.User;
+import org.json.JSONException;
+import org.json.JSONObject;
 import service.KweetService;
 import service.UserService;
 
@@ -24,17 +26,27 @@ public class KweetResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes
-    public Response addKweet(String kweet,@PathParam("id") Long id) {
+    public Response addKweet(String kweet, @PathParam("id") Long id) {
+        System.err.print("addkweet");
+        System.err.print(kweet.toString());
+        JSONObject jsonObject = null;
+        String message = null;
+        try {
+            jsonObject = new JSONObject(kweet);
+            message = jsonObject.getString("message");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         User user = userService.findById(id);
-        kweetService.add(kweet, user);
-        if (kweet == null) {
+        if (message == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Kweet cannot be empty").build();
         }
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("User not found with id:" + user.getId()).build();
         }
-        String json = kweet;
-        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        Kweet kwt = kweetService.add(message, user);
+        return Response.ok(kwt, MediaType.APPLICATION_JSON).build();
     }
 
     @PUT

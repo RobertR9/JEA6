@@ -73,7 +73,7 @@ public class StartPageController implements Serializable {
         List<Kweet> kweets = kweetService.getKweetsByUser(loginController.getUser());
         if (kweets.size() != 0) {
             Kweet kweet = kweets.get(0);
-            return kweet.getPostDate() + ": " + kweet.getKweet();
+            return kweet.getPostDate() + ": " + kweet.getMessage();
         }
         return "You havent posted a kweet yet.";
     }

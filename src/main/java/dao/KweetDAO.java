@@ -39,6 +39,11 @@ public interface KweetDAO {
      * @param user User
      * @return List<Kweet>
      */
-    List<Kweet> findTweetsByUser(User user);
+    List<Kweet> findKweetsByUser(User user);
 
+    /**
+     * @param username String
+     * @return List<Kweet>
+     */
+    List findKweetsMentionedByUser(String username);
 }

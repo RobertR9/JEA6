@@ -65,9 +65,21 @@ public class KweetDAOJPAImpl implements KweetDAO {
      * @return List<Kweet>
      */
     @Override
-    public List<Kweet> findTweetsByUser(User user) {
+    public List<Kweet> findKweetsByUser(User user) {
         Query q = em.createNamedQuery("Kweet.findAllByUser");
         q.setParameter("user", user);
+        List<Kweet> kweets = q.getResultList();
+        return kweets;
+    }
+
+    /**
+     * @param username String
+     * @return List<Kweet>
+     */
+    @Override
+    public List<Kweet> findKweetsMentionedByUser(String username) {
+        Query q = em.createNamedQuery("Kweet.findBySearchString");
+        q.setParameter("searchString", "%@" + username + "%");
         return q.getResultList();
     }
 

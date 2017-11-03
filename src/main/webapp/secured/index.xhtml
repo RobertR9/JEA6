@@ -39,7 +39,7 @@
                                             <h:dataTable id="listKweet" prependId="true" var="kweet"
                                                          value="#{startPageController.getTimeLine()}">
                                                 <h:column>
-                                                    <h:outputText value="#{kweet.kweet}"/>
+                                                    <h:outputText value="#{kweet.message}"/>
                                                     <br/>
                                                     <b>
                                                         <h:outputText class="user"
@@ -70,6 +70,15 @@
                             <h:outputLabel>#{msg.index_kweets_total} #{LoginController.user.kweets.size()}</h:outputLabel>
                             <br/>
                             <h:outputText value="#{startPageController.getLatestKweet()}"/>
+                        </p:panel>
+                        <p:panel>
+                            <h:commandLink action="#">
+                                <p:graphicImage id="city"
+                                                value="#"
+                                                width="250"
+                                                height="190">
+                                </p:graphicImage>
+                            </h:commandLink>
                         </p:panel>
                     </div>
                     <div class="ui-g-12 ui-g-nopad">
