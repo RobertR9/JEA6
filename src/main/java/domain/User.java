@@ -180,6 +180,6 @@ public class User {
     }
 
     public void removeKweet(Kweet kweet) {
-        kweets.removeIf(kwt -> kwt.getKweet().equals(kweet.getKweet()));
+        kweets.removeIf(kwt -> kwt.getMessage().equals(kweet.getMessage()));
     }
 }
