@@ -54,5 +54,9 @@ public class KweetService implements Serializable {
     public List<Kweet> findKweetsMentionedByUser(String username) {
         return kweetDAOJPAImpl.findKweetsMentionedByUser(username);
     }
+    public List<String> findTrends() {
+        return kweetDAOJPAImpl.findTrends();
+    }
+
 
 }

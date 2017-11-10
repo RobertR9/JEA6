@@ -46,4 +46,9 @@ public interface KweetDAO {
      * @return List<Kweet>
      */
     List findKweetsMentionedByUser(String username);
+
+    /**
+     * @return List<String>
+     */
+    List<String> findTrends();
 }

@@ -50,7 +50,7 @@ public class UserJPATest {
     @Test
     public void savingUserSuccessful() {
         Integer expectedResult = 1;
-        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
         tx.begin();
         userDAO.createUser(user);
         tx.commit();
@@ -59,7 +59,7 @@ public class UserJPATest {
 
     @Test
     public void findUserSuccessfull() {
-        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
         tx.begin();
         userDAO.createUser(user);
         tx.commit();
@@ -69,9 +69,9 @@ public class UserJPATest {
 
     @Test
     public void followerTest() {
-        User henk = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
-        User bert = new User("Bert", "test", "Bert de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
-        User klaas = new User("Klaas", "test", "Klaas de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        User henk = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
+        User bert = new User("Bert", "test", "Bert de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
+        User klaas = new User("Klaas", "test", "Klaas de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
         tx.begin();
         userDAO.createUser(henk);
         userDAO.createUser(bert);

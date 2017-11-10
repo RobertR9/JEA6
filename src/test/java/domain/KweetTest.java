@@ -18,7 +18,7 @@ public class KweetTest {
 
     @Before
     public void setUp() {
-        henk = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        henk = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
     }
 
     @After

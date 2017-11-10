@@ -44,32 +44,35 @@ public class User {
     }
 
     /**
-     * @param username String
-     * @param password String
-     * @param name     String
-     * @param location String
-     * @param web      String
-     * @param bio      String
+     * @param username       String
+     * @param password       String
+     * @param name           String
+     * @param location       String
+     * @param web            String
+     * @param bio            String
+     * @param profilePicture String
      */
-    public User(String username, String password, String name, String location, String web, String bio) {
+    public User(String username, String password, String name, String location, String web, String bio, String profilePicture) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.location = location;
         this.web = web;
         this.bio = bio;
+        this.profilePicture = profilePicture;
     }
 
     /**
-     * @param id       Integer
-     * @param username String
-     * @param password String
-     * @param name     String
-     * @param location String
-     * @param web      String
-     * @param bio      String
+     * @param id             Integer
+     * @param username       String
+     * @param password       String
+     * @param name           String
+     * @param location       String
+     * @param web            String
+     * @param bio            String
+     * @param profilePicture String
      */
-    public User(Integer id, String username, String password, String name, String location, String web, String bio) {
+    public User(Integer id, String username, String password, String name, String location, String web, String bio, String profilePicture) {
         this.id = new Long(id);
         this.username = username;
         this.password = password;
@@ -77,6 +80,7 @@ public class User {
         this.location = location;
         this.web = web;
         this.bio = bio;
+        this.profilePicture = profilePicture;
     }
 
 

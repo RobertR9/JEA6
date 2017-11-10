@@ -46,7 +46,7 @@ public class UserRestTest extends JerseyTest {
     @Test
     public void crud() {
         String mediaType = MediaType.APPLICATION_JSON;
-        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen","no-user-image.gif");
 
         final Entity<User> userEntity = Entity.entity(user, mediaType);
         Response response = this.client.target(BASEURL).request().post(userEntity, Response.class);

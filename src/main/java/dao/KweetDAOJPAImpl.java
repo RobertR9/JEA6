@@ -83,4 +83,15 @@ public class KweetDAOJPAImpl implements KweetDAO {
         return q.getResultList();
     }
 
+    /**
+     * @return List<String>
+     */
+    @Override
+    public List<String> findTrends() {
+        Query q = em.createNamedQuery("Kweet.findTrends");
+        q.setParameter("searchString", "#%");
+        return q.getResultList();
+    }
+
+
 }

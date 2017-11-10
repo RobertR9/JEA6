@@ -35,14 +35,14 @@ public class UserServiceTest {
 
     @Test
     public void savingUserSuccessful() {
-        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
         userService.add(user);
         verify(userDAO, Mockito.times(1)).createUser(user);
     }
 
     @Test
     public void findUserSuccessfull() {
-        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen");
+        User user = new User("Henk", "test", "Henk de Testman", "The Netherlands", "www.google.nl", "Houd van testen", null);
 
         when(userService.findByUsername(user.getUsername())).thenReturn(user);
         User found = userService.findByUsername(user.getUsername());

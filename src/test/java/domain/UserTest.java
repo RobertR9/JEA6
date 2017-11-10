@@ -25,13 +25,13 @@ public class UserTest {
         userList = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            userList.add(new User("Test" + i, "test+i", "Test+i Test", "The Netherlands", "www.google.nl", "test user" + i));
+            userList.add(new User("Test" + i, "test+i", "Test+i Test", "The Netherlands", "www.google.nl", "test user" + i, null));
         }
 
         userFollowingList = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            userFollowingList.add(new User("Test" + i, "test+i", "Test+i Test", "The Netherlands", "www.google.nl", "test user" + i));
+            userFollowingList.add(new User("Test" + i, "test+i", "Test+i Test", "The Netherlands", "www.google.nl", "test user" + i, null));
         }
     }
 
@@ -41,7 +41,7 @@ public class UserTest {
 
     @Test
     public void testAddUser() throws Exception {
-        User user = new User("Henk", "test", "Henkie", "The Netherlands", "www.google.nl", "test user");
+        User user = new User("Henk", "test", "Henkie", "The Netherlands", "www.google.nl", "test user", null);
         userList.add(user);
         assertEquals(11, userList.size());
     }

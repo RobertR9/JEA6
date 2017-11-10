@@ -8,6 +8,7 @@ import java.util.Date;
         @NamedQuery(name = "Kweet.findAllByUser", query = "SELECT k FROM Kweet as k WHERE k.owner = :user ORDER BY k.postDate DESC"),
         @NamedQuery(name = "Kweet.findBySearchString", query = "SELECT k FROM Kweet as k WHERE k.message LIKE :searchString"),
         @NamedQuery(name = "Kweet.findMentions", query = "SELECT k FROM Kweet as k WHERE k.message LIKE :username"),
+        @NamedQuery(name = "Kweet.findTrends", query = "SELECT k FROM Kweet as k WHERE k.message LIKE :searchString"),
 
 })
 public class Kweet {

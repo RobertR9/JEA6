@@ -75,12 +75,24 @@ public class UserResource {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("user/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findUser(@PathParam("id") Long id) {
         User foundUser = userService.findById(id);
         if (foundUser == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("User not found with id:" + id).build();
+        }
+
+        return Response.ok().entity(foundUser).build();
+    }
+
+    @GET
+    @Path("/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findUser(@PathParam("username") String username) {
+        User foundUser = userService.findByUsername(username);
+        if (foundUser == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("User not found with username:" + username).build();
         }
 
         return Response.ok().entity(foundUser).build();

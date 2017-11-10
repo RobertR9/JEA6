@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Stateless
 @Path("/kweets")
@@ -72,5 +73,12 @@ public class KweetResource {
 
         String json = kweet.getId().toString();
         return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/trends")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> findTrends() {
+        return kweetService.findTrends();
     }
 }

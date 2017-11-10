@@ -18,12 +18,12 @@ public class InitUser {
     @PostConstruct
     public void init() {
         System.out.println("INIT");
-        User admin = new User("Admin", "admin", "Admin", "de maan", "www.example.com", "bannen");
-        User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen");
-        User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen");
-        User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen");
-        User klaas = new User("Klaas", "klaas", "klaas test", "tiel", "www.google.com", "voetballen");
-        User jan = new User("Jan", "jan", "jan test", "den haag", "www.google.com", "gamen");
+        User admin = new User("Admin", "admin", "Admin", "de maan", "www.example.com", "bannen", "no-user-image.gif");
+        User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen", "no-user-image.gif");
+        User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen", "no-user-image.gif");
+        User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen", "no-user-image.gif");
+        User klaas = new User("Klaas", "klaas", "klaas test", "tiel", "www.google.com", "voetballen", "no-user-image.gif");
+        User jan = new User("Jan", "jan", "jan test", "den haag", "www.google.com", "gamen", "no-user-image.gif");
         ud.createUser(admin);
 
         hans.addFollower(frank);
@@ -40,10 +40,14 @@ public class InitUser {
         jan.addFollower(hans);
 
         bert.addKweet("First tweet from " + bert.getUsername());
+        bert.addKweet("It is a nice day #sun");
         hans.addKweet("First tweet from " + hans.getUsername());
+        hans.addKweet("Beatiful weather #sun");
         frank.addKweet("First tweet from " + frank.getUsername());
+        frank.addKweet("#sun is shining today!");
         klaas.addKweet("First tweet from " + klaas.getUsername());
         jan.addKweet("First tweet from " + jan.getUsername());
+        jan.addKweet("Had a great  night with @" + hans.getUsername());
 
         ud.createUser(hans);
         ud.createUser(frank);
