@@ -2,8 +2,12 @@ package boundary.rest;
 
 import domain.Kweet;
 import domain.User;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.lang3.time.DateUtils;
 import service.KweetService;
 import service.UserService;
+import util.SimpleKeyGenerator;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -12,6 +16,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.security.Key;
+import java.util.Date;
 import java.util.List;
 
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
@@ -107,10 +113,10 @@ public class UserResource {
             System.err.print("username: " + username + " password: " + password);
             // Authenticate the user using the credentials provided
             this.userService.authenticate(username, password);
-
             // Issue a token for the user
             String token = issueToken(username);
-//            JSONObject jsonObj = new JSONObject("{\"token\":\"" + token + "\"}");
+            // Return the token on the response
+            System.out.print(token);
             // Return the token on the response
             return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
 
@@ -175,17 +181,16 @@ public class UserResource {
     }
 
     private String issueToken(String login) {
-//        Key key = keyGenerator.generateKey();
-//        Date expirationDate = new Date(); //now
-//        expirationDate = DateUtils.addMinutes(expirationDate, 15);
-//        String jwtToken = Jwts.builder()
-//                .setSubject(login)
-//                .setIssuer(uriInfo.getAbsolutePath().toString())
-//                .setIssuedAt(new Date())
-//                .setExpiration(expirationDate)
-//                .signWith(SignatureAlgorithm.HS512, key)
-//                .compact();
-//        return jwtToken;
-        return login;
+        SimpleKeyGenerator keygen = new SimpleKeyGenerator();
+        Key key = keygen.generateKey();
+        Date expirationDate = new Date(); //now
+        expirationDate = DateUtils.addMinutes(expirationDate, 15);
+        return Jwts.builder()
+                .setSubject(login)
+                .setIssuer(uriInfo.getAbsolutePath().toString())
+                .setIssuedAt(new Date())
+                .setExpiration(expirationDate)
+                .signWith(SignatureAlgorithm.HS512, key)
+                .compact();
     }
 }
