@@ -18,12 +18,12 @@ public class InitUser {
     @PostConstruct
     public void init() {
         System.out.println("INIT");
-        User admin = new User("Admin", "admin", "Admin", "de maan", "www.example.com", "bannen", "no-user-image.gif");
-        User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen", "no-user-image.gif");
-        User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen", "no-user-image.gif");
-        User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen", "no-user-image.gif");
-        User klaas = new User("Klaas", "klaas", "klaas test", "tiel", "www.google.com", "voetballen", "no-user-image.gif");
-        User jan = new User("Jan", "jan", "jan test", "den haag", "www.google.com", "gamen", "no-user-image.gif");
+        User admin = new User("Admin", "admin", "Admin", "de maan", "www.example.com", "bannen", "assets/images/no-user-image.gif");
+        User hans = new User("Hans", "hans", "hans test", "eindhoven", "www.google.com", "zwemmen", "assets/images/no-user-image.gif");
+        User frank = new User("Frank", "frank", "frank test", "den bosch", "www.google.com", "fietsen", "assets/images/no-user-image.gif");
+        User bert = new User("Bert", "bert", "bert test", "nijmegen", "www.google.com", "vissen", "assets/images/no-user-image.gif");
+        User klaas = new User("Klaas", "klaas", "klaas test", "tiel", "www.google.com", "voetballen", "assets/images/no-user-image.gif");
+        User jan = new User("Jan", "jan", "jan test", "den haag", "www.google.com", "gamen", "assets/images/no-user-image.gif");
         ud.createUser(admin);
 
         hans.addFollower(frank);
